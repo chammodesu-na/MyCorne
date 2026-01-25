@@ -10,6 +10,7 @@
     col-offset = <6>;
 };
 
+
 &kscan0 {
     col-gpios
         = <&pro_micro 20 GPIO_ACTIVE_HIGH>
@@ -23,7 +24,7 @@
 
 / {
     chosen {
-        zmk,battery = &vbatt;
+      zmk,battery = &vbatt;
     };
 
     vbatt: vbatt {
@@ -31,9 +32,18 @@
     };
 };
 
+&tps43_split {
+    device = <&tps43>;
+};
+
+&tps43_listener {
+    status = "okay";
+};
+
+
 &pro_micro_i2c {
     status = "okay";
-    
+    //this needs to be checked
     tps43: iqs5xx@74 {
         status = "okay";
         compatible = "azoteq,iqs5xx";
@@ -42,6 +52,10 @@
         reset-gpios = <&gpio1 1 GPIO_ACTIVE_LOW>;
         rdy-gpios = <&gpio1 2 GPIO_ACTIVE_HIGH>;
 
+        /*
+         * Potentially non-exhaustive list of configuration options.
+         * See: dts/bindings/input/azoteq,iqs5xx-common.yaml for a full list.
+         */
         one-finger-tap;
         press-and-hold;
         press-and-hold-time = <250>;
@@ -56,12 +70,4 @@
 
         switch-xy;
     };
-};
-
-&tps43_split {
-    device = <&tps43>;
-};
-
-&tps43_listener {
-    status = "okay";
 };
