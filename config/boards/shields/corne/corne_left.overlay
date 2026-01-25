@@ -1,0 +1,32 @@
+/*
+ * Copyright (c) 2020 Ryan Cross
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#include "corne.dtsi"
+
+&kscan0 {
+    col-gpios
+       = <&pro_micro 20 GPIO_ACTIVE_HIGH>
+        , <&pro_micro 8 GPIO_ACTIVE_HIGH>
+        , <&pro_micro 7 GPIO_ACTIVE_HIGH>
+        , <&pro_micro 6 GPIO_ACTIVE_HIGH>
+        , <&pro_micro 5 GPIO_ACTIVE_HIGH>
+        , <&pro_micro 4 GPIO_ACTIVE_HIGH>
+        ;
+};
+
+/ {
+    chosen {
+      zmk,battery = &vbatt;
+    };
+    vbatt: vbatt {
+        compatible = "zmk,battery-nrf-vddh";
+    };
+};
+
+/* [중요] 왼쪽 유닛에는 트랙패드가 없으므로, 스플릿 입력 노드를 비활성화해야 합니다 */
+&tps43_split {
+    status = "disabled";
+};

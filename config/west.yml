@@ -1,0 +1,24 @@
+manifest:
+  remotes:
+    - name: zmkfirmware
+      url-base: https://github.com/zmkfirmware
+    #- name: petejohanson
+    #  url-base: https://github.com/petejohanson
+    # nice_oled - nice_epaper - dongle_display!view - oled Adapter
+    - name: AYM1607
+      url-base: https://github.com/AYM1607
+    - name: englmaxi
+      url-base: https://github.com/chammodesu-na
+  projects:
+    - name: zmk
+      remote: zmkfirmware
+      revision: v0.3
+      import: app/west.yml
+    - name: zmk-driver-azoteq-iqs5xx
+      remote: AYM1607
+      revision: main
+    - name: zmk-dongle-display-0.3
+      remote: englmaxi
+      revision: main
+  self:
+    path: config
