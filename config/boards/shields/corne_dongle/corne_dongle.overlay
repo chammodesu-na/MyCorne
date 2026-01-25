@@ -1,10 +1,8 @@
 /*
- * Corne Dongle Overlay (OLED 디스플레이 + 트랙패드 수신)
+ * Corne Dongle Overlay
  */
 
 #include <dt-bindings/zmk/matrix_transform.h>
-#include <dt-bindings/zmk/input_transform.h>
-#include <input/processors.dtsi>
 #include <layouts/foostan/corne/6column.dtsi>
 
 &foostan_corne_6col_layout {
@@ -16,6 +14,7 @@
         zephyr,display = &oled;
         zmk,kscan = &mock_kscan;
         zmk,physical-layout = &foostan_corne_6col_layout;
+        zmk,battery = &vbatt;
     };
 
     mock_kscan: mock_kscan_0 {
@@ -37,31 +36,12 @@
         >;
     };
 
-    /* 동글용 가상 배터리 */
     vbatt: vbatt {
         compatible = "zmk,battery-nrf-vddh";
         label = "BATTERY";
     };
-
-    /* 오른쪽 반에서 보내는 트랙패드 데이터 수신 */
-    tps43_split: tps43_split {
-        compatible = "zmk,input-split";
-        status = "okay";
-    };
-
-    /* 수신한 트랙패드 데이터 처리 */
-    tps43_listener: tps43_listener {
-        compatible = "zmk,input-listener";
-        status = "okay";
-        device = <&tps43_split>;
-        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP | INPUT_TRANSFORM_X_INVERT)>, 
-                           <&zip_scroll_transform (INPUT_TRANSFORM_XY_SWAP)>,
-                           <&zip_temp_layer 4 500>,
-                           <&zip_xy_scaler 3 2>; 
-    };
 };
 
-/* OLED 디스플레이 설정 */
 &pro_micro_i2c {
     status = "okay";
 
