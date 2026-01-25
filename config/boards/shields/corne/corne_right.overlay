@@ -24,7 +24,8 @@
 
 / {
     chosen {
-      zmk,battery = &vbatt;
+        zmk,battery = &vbatt;
+        /delete-property/ zephyr,display;  // 디스플레이 참조 제거
     };
 
     vbatt: vbatt {
@@ -43,7 +44,8 @@
 
 &pro_micro_i2c {
     status = "okay";
-    //this needs to be checked
+    
+    // OLED 설정 완전 제거하고 트랙패드만 유지
     tps43: iqs5xx@74 {
         status = "okay";
         compatible = "azoteq,iqs5xx";
@@ -69,5 +71,9 @@
         stationary-threshold = <5>;
 
         switch-xy;
+        
+        // 절전 모드 설정 추가
+        sleep-mode = <2>;
+        auto-modes;
     };
 };
