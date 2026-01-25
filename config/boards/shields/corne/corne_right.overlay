@@ -71,9 +71,5 @@
         stationary-threshold = <5>;
 
         switch-xy;
-        
-        // 절전 모드 설정 추가
-        sleep-mode = <2>;
-        auto-modes;
     };
 };
