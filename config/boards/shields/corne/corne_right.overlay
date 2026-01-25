@@ -25,7 +25,6 @@
 / {
     chosen {
         zmk,battery = &vbatt;
-        /delete-property/ zephyr,display;  // 디스플레이 참조 제거
     };
 
     vbatt: vbatt {
@@ -45,7 +44,6 @@
 &pro_micro_i2c {
     status = "okay";
     
-    // OLED 설정 완전 제거하고 트랙패드만 유지
     tps43: iqs5xx@74 {
         status = "okay";
         compatible = "azoteq,iqs5xx";
@@ -54,10 +52,6 @@
         reset-gpios = <&gpio1 1 GPIO_ACTIVE_LOW>;
         rdy-gpios = <&gpio1 2 GPIO_ACTIVE_HIGH>;
 
-        /*
-         * Potentially non-exhaustive list of configuration options.
-         * See: dts/bindings/input/azoteq,iqs5xx-common.yaml for a full list.
-         */
         one-finger-tap;
         press-and-hold;
         press-and-hold-time = <250>;
