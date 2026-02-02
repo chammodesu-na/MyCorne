@@ -43,7 +43,7 @@
 
 &pro_micro_i2c {
     status = "okay";
-    //this needs to be checked
+    
     tps43: iqs5xx@74 {
         status = "okay";
         compatible = "azoteq,iqs5xx";
@@ -53,8 +53,7 @@
         rdy-gpios = <&gpio1 2 GPIO_ACTIVE_HIGH>;
 
         /*
-         * Potentially non-exhaustive list of configuration options.
-         * See: dts/bindings/input/azoteq,iqs5xx-common.yaml for a full list.
+         * 터치패드 설정
          */
         one-finger-tap;
         press-and-hold;
@@ -69,5 +68,9 @@
         stationary-threshold = <5>;
 
         switch-xy;
+        
+        /* 슬립 관련 설정 추가 */
+        wakeup-source;
+        sleep-enable;
     };
 };
