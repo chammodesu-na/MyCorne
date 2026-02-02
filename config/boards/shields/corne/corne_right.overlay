@@ -50,11 +50,9 @@
         reg = <0x74>;
 
         reset-gpios = <&gpio1 1 GPIO_ACTIVE_LOW>;
-        rdy-gpios = <&gpio1 2 GPIO_ACTIVE_HIGH>;
+        /* GPIO_PULL_DOWN 추가로 슬립 시 떠있는 신호 방지 */
+        rdy-gpios = <&gpio1 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
 
-        /*
-         * 터치패드 설정
-         */
         one-finger-tap;
         press-and-hold;
         press-and-hold-time = <250>;
@@ -68,9 +66,5 @@
         stationary-threshold = <5>;
 
         switch-xy;
-        
-        /* 슬립 관련 설정 추가 */
-        wakeup-source;
-        sleep-enable;
     };
 };
