@@ -10,6 +10,9 @@
     col-offset = <6>;
 };
 
+&oled {
+    status = "disabled";
+};
 
 &kscan0 {
     col-gpios
